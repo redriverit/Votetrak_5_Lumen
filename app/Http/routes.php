@@ -14,3 +14,19 @@
 $app->get('/', function() use ($app) {
     return $app->welcome();
 });
+$app->group(['prefix'=>'api/v1'],function() use ($app){
+
+   // $app->group(['middleware' => 'token'],function() use ($app){
+
+    $app->get('/voters', 'App\Http\Controllers\ApiController@index');
+    $app->get('/voters/{registrationId}/contacts', 'App\Http\Controllers\ApiController@contacts');
+
+    $app->post('/voters','App\Http\Controllers\ApiController@syncVoters');
+    $app->post('/contacts','App\Http\Controllers\ApiController@syncContacts');
+    $app->get('/activities', 'App\Http\Controllers\ApiController@activities');
+    $app->get('/users', 'App\Http\Controllers\ApiController@users');
+
+
+
+    });
+//});
